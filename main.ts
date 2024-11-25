@@ -10,6 +10,7 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite, location) {
     game.splash("LEVEL FINISHED! NEXT LEVEL!")
+    pauseUntil(() => !(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile16`)))
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile1`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile7`)))) {
