@@ -11,6 +11,10 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite, location) {
     game.splash("LEVEL FINISHED! NEXT LEVEL!")
     pauseUntil(() => !(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile16`)))
+    game.splash("Hello, ", game.askForString("What is your name?"))
+    game.splash("The kingdom had been attacked by the dragon, Greenfire")
+    game.splash("All the gems that gave us powers are lost.")
+    game.splash("Please, help us collect the gems and defeat the dragon.")
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile1`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile7`)))) {
@@ -23,6 +27,7 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 let playerSprite: Sprite = null
+carnival.addLabelTo("Reach the end", carnival.Areas.Bottom)
 tiles.setCurrentTilemap(tilemap`mazelv1`)
 playerSprite = sprites.create(assets.image`dot player`, SpriteKind.Player)
 scene.cameraFollowSprite(playerSprite)
