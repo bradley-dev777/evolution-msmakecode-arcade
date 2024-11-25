@@ -25,7 +25,10 @@ def on_left_pressed():
 controller.left.on_event(ControllerButtonEvent.PRESSED, on_left_pressed)
 
 def on_overlap_tile(sprite, location):
-    game.splash("LEVEL FINISHED! NEXT LEVEL!")
+    game.splash("Hello, ", game.ask_for_string("What is your name?"))
+    game.splash("The kingdom had been attacked by the dragon, Greenfire")
+    game.splash("All the gems that gave us powers are lost.")
+    game.splash("Please, help us collect the gems and defeat the dragon.")
 scene.on_overlap_tile(SpriteKind.player,
     assets.tile("""
         myTile16
@@ -59,6 +62,7 @@ def on_down_pressed():
 controller.down.on_event(ControllerButtonEvent.PRESSED, on_down_pressed)
 
 playerSprite: Sprite = None
+carnival.add_label_to("Reach the end", carnival.Areas.BOTTOM)
 tiles.set_current_tilemap(tilemap("""
     mazelv1
 """))
