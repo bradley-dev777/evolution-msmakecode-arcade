@@ -1,5 +1,6 @@
 {
     "name": "-E-V-O-U-L-O-U-T-I-O-N-",
+    "version": "1.0.0",
     "description": "",
     "dependencies": {
         "device": "*",
