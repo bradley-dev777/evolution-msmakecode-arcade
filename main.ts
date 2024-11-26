@@ -2,28 +2,35 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, 
     game.splash("Congratulations, ", plrname)
     game.splash("You have collected a gem!")
     game.splash("THE TURQUOISE GEM: RANDOM TELEPORTATION UPON B BUTTON")
+    game.splash("Up front is Greenfire , the evil snake. Good luck!")
     XTRASHOOT = true
-    mySprite.setImage(assets.image`dot player STAGE 3`)
-    tiles.setCurrentTilemap(tilemap`level14`)
+    mySprite.setImage(assets.image`myImage`)
+    tiles.setCurrentTilemap(tilemap`level16`)
     tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
-    mySprite2 = sprites.create(img`
-        . . . . . . . . . . . . . . . 
-        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-        . 2 . . . . . . . . . . . 2 . 
-        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
-        . 2 . 2 . . . . . . . 2 . 2 . 
-        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
-        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
-        . 2 . 2 . 2 . 2 . 2 . 2 . 2 . 
-        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
-        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
-        . 2 . 2 . . . . . . . 2 . 2 . 
-        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
-        . 2 . . . . . . . . . . . 2 . 
-        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-        . . . . . . . . . . . . . . . 
+    GREENFIRE_BOSS = sprites.create(img`
+        5 5 5 5 5 c c c c c c c 5 5 5 5 
+        5 5 5 5 c 6 7 7 7 7 7 6 c 5 5 5 
+        5 5 5 c 7 c 6 6 6 6 c 7 6 c 5 5 
+        5 5 c 6 7 6 f 6 6 f 6 7 7 c 5 5 
+        5 5 c 7 7 7 7 7 7 7 7 7 7 c 5 5 
+        5 5 4 4 4 1 f f 1 6 7 7 7 f 5 5 
+        5 4 4 5 5 1 f f 1 f 7 7 7 f 5 5 
+        4 5 5 4 4 2 2 2 2 f 7 7 6 f 5 5 
+        5 4 4 5 5 2 2 2 2 7 7 6 f c 5 5 
+        5 c 4 4 4 7 7 7 7 7 c c 7 7 c 5 
+        c 7 1 1 1 7 7 7 7 f c 6 7 7 7 c 
+        f 1 1 1 1 1 7 6 f c c 6 6 6 c c 
+        f 1 1 1 1 1 1 6 6 c 6 6 6 c 5 5 
+        f 6 1 1 1 1 1 6 6 6 6 6 6 c 5 5 
+        5 f 6 1 1 1 1 1 6 6 6 6 c 5 5 5 
+        5 5 f f c c c c c c c c 5 5 5 5 
         `, SpriteKind.Enemy)
-    tiles.placeOnRandomTile(mySprite2, assets.tile`myTile4`)
+    tiles.placeOnRandomTile(GREENFIRE_BOSS, assets.tile`myTile4`)
+    GF_HEALTH = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
+    GF_HEALTH.attachToSprite(GREENFIRE_BOSS)
+    statusbar = statusbars.create(20, 4, StatusBarKind.Health)
+    statusbar.attachToSprite(playerSprite)
+    GREENFIRE_BOSS.follow(playerSprite, 50)
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile3`)))) {
@@ -196,16 +203,27 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    sprites.destroy(otherSprite, effects.fire, 500)
     if (otherSprite == mySprite) {
         tiles.setCurrentTilemap(tilemap`level9`)
+        sprites.destroy(otherSprite, effects.fire, 500)
     } else if (otherSprite == mySprite2) {
         tiles.setCurrentTilemap(tilemap`level15`)
+        sprites.destroy(otherSprite, effects.fire, 500)
+    } else if (otherSprite == GREENFIRE_BOSS) {
+        GF_HEALTH.value += -25
+        if (GF_HEALTH.value == 0) {
+            game.setGameOverEffect(true, effects.starField)
+            game.setGameOverMessage(true, "YOU WON!!! TIME:" + game.runtime() + "MS")
+            game.gameOver(true)
+        }
     }
 })
+let mySprite2: Sprite = null
 let projectile: Sprite = null
 let shtbar: StatusBarSprite = null
-let mySprite2: Sprite = null
+let statusbar: StatusBarSprite = null
+let GF_HEALTH: StatusBarSprite = null
+let GREENFIRE_BOSS: Sprite = null
 let mySprite: Sprite = null
 let plrname = ""
 let playerSprite: Sprite = null
