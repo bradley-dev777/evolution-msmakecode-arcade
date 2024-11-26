@@ -1,3 +1,30 @@
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, location) {
+    game.splash("Congratulations, ", plrname)
+    game.splash("You have collected a gem!")
+    game.splash("THE TURQUOISE GEM: RANDOM TELEPORTATION UPON B BUTTON")
+    XTRASHOOT = true
+    mySprite.setImage(assets.image`dot player STAGE 3`)
+    tiles.setCurrentTilemap(tilemap`level14`)
+    tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
+    mySprite2 = sprites.create(img`
+        . . . . . . . . . . . . . . . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . 2 . . . . . . . . . . . 2 . 
+        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
+        . 2 . 2 . . . . . . . 2 . 2 . 
+        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
+        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
+        . 2 . 2 . 2 . 2 . 2 . 2 . 2 . 
+        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
+        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
+        . 2 . 2 . . . . . . . 2 . 2 . 
+        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
+        . 2 . . . . . . . . . . . 2 . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy)
+    tiles.placeOnRandomTile(mySprite2, assets.tile`myTile4`)
+})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile3`)))) {
         tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column, playerSprite.tilemapLocation().row - 1))
@@ -97,10 +124,32 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile18`, function (sprite, 
     game.splash("You have collected a gem!")
     game.splash("THE RED GEM: INCREASE SHOOT METER RECOVERY SPEED")
     XTRASHOOT = true
+    mySprite.setImage(assets.image`dot player STAGE 3`)
+    tiles.setCurrentTilemap(tilemap`level14`)
+    tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
+    mySprite2 = sprites.create(img`
+        . . . . . . . . . . . . . . . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . 2 . . . . . . . . . . . 2 . 
+        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
+        . 2 . 2 . . . . . . . 2 . 2 . 
+        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
+        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
+        . 2 . 2 . 2 . 2 . 2 . 2 . 2 . 
+        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
+        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
+        . 2 . 2 . . . . . . . 2 . 2 . 
+        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
+        . 2 . . . . . . . . . . . 2 . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy)
+    tiles.placeOnRandomTile(mySprite2, assets.tile`myTile4`)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite, location) {
     tiles.setCurrentTilemap(tilemap`level0`)
     tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
+    game.splash("Keep going!")
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(playerSprite.tileKindAt(TileDirection.Right, assets.tile`myTile22`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile1`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile7`)) || playerSprite.tileKindAt(TileDirection.Right, assets.tile`myTile11`)))) {
@@ -114,7 +163,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite, 
     game.splash("THE BLUE GEM: ABILITY TO SHOOT OUT BASIC PROJECTILES WITH A BUTTON")
     BASCSHOOT = true
     game.splash("Now, enemies will spawn. Good luck! ")
-    tiles.setCurrentTilemap(tilemap`level9`)
+    tiles.setCurrentTilemap(tilemap`level12`)
     tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
     // THE SHT IS NOT BAD WORD DO NOT QUESTION IT
     shtbar = statusbars.create(20, 4, StatusBarKind.Magic)
@@ -139,6 +188,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite, 
         . . . . . . . . . . . . . . . 
         `, SpriteKind.Enemy)
     tiles.placeOnRandomTile(mySprite, assets.tile`myTile4`)
+    playerSprite.setImage(assets.image`dot player STAGE 2`)
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile1`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile0`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile6`)))) {
@@ -147,11 +197,16 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite, effects.fire, 500)
-    tiles.setCurrentTilemap(tilemap`level9`)
+    if (otherSprite == mySprite) {
+        tiles.setCurrentTilemap(tilemap`level9`)
+    } else if (otherSprite == mySprite2) {
+        tiles.setCurrentTilemap(tilemap`level15`)
+    }
 })
-let mySprite: Sprite = null
 let projectile: Sprite = null
 let shtbar: StatusBarSprite = null
+let mySprite2: Sprite = null
+let mySprite: Sprite = null
 let plrname = ""
 let playerSprite: Sprite = null
 let XTRASHOOT = false
@@ -160,7 +215,7 @@ BASCSHOOT = false
 XTRASHOOT = false
 carnival.addLabelTo("Reach the end", carnival.Areas.Bottom, 15)
 tiles.setCurrentTilemap(tilemap`mazelv1`)
-playerSprite = sprites.create(assets.image`dot player`, SpriteKind.Player)
+playerSprite = sprites.create(assets.image`dot player ORIGINAL`, SpriteKind.Player)
 scene.cameraFollowSprite(playerSprite)
 tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
 plrname = game.askForString("What is your name?")
