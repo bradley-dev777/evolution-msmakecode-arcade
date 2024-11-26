@@ -1,7 +1,7 @@
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, location) {
     game.splash("Congratulations, ", plrname)
     game.splash("You have collected a gem!")
-    game.splash("THE TURQUOISE GEM: RANDOM TELEPORTATION UPON B BUTTON")
+    game.splash("THE TURQUOISE GEM: UNLOCK BOSS LEVEL")
     game.splash("Up front is Greenfire , the evil snake. Good luck!")
     XTRASHOOT = true
     mySprite.setImage(assets.image`myImage`)
@@ -238,7 +238,7 @@ scene.cameraFollowSprite(playerSprite)
 tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
 plrname = game.askForString("What is your name?")
 game.splash("Hello, ", plrname)
-game.splash("The kingdom had been attacked by the dragon, Greenfire")
+game.splash("The kingdom had been attacked by the evil snake, Greenfire")
 game.splash("All the gems that gave us powers are lost.")
 game.splash("Please, help us collect the gems and defeat the dragon.")
 game.onUpdateInterval(3000, function () {
