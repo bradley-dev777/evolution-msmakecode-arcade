@@ -4,8 +4,7 @@
     "description": "",
     "dependencies": {
         "device": "*",
-        "carnival": "github:microsoft/arcade-carnival#v0.0.7",
-        "pxt-raycasting": "github:aqeeaqee/pxt-raycasting#v0.3.18"
+        "carnival": "github:microsoft/arcade-carnival#v0.0.7"
     },
     "files": [
         "main.blocks",
