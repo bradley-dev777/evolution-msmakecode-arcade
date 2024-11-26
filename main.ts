@@ -1,84 +1,3 @@
-controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile3`)))) {
-        tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column, playerSprite.tilemapLocation().row - 1))
-    }
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite, location) {
-    tiles.setCurrentTilemap(tilemap`level0`)
-    tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
-    game.splash("Keep going!")
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile18`, function (sprite, location) {
-    game.splash("Congratulations, ", plrname)
-    game.splash("You have collected a gem!")
-    game.splash("THE RED GEM: INCREASE SHOOT METER RECOVERY SPEED")
-    XTRASHOOT = true
-    playerSprite.setImage(assets.image`dot player STAGE 3`)
-    tiles.setCurrentTilemap(tilemap`level14`)
-    tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
-    mySprite2 = sprites.create(img`
-        . . . . . . . . . . . . . . . 
-        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-        . 2 . . . . . . . . . . . 2 . 
-        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
-        . 2 . 2 . . . . . . . 2 . 2 . 
-        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
-        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
-        . 2 . 2 . 2 . 2 . 2 . 2 . 2 . 
-        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
-        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
-        . 2 . 2 . . . . . . . 2 . 2 . 
-        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
-        . 2 . . . . . . . . . . . 2 . 
-        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-        . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy)
-    tiles.placeOnRandomTile(mySprite2, assets.tile`myTile4`)
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite, location) {
-    game.splash("Congratulations, ", plrname)
-    game.splash("You have collected a gem!")
-    game.splash("Gems give you super powers!")
-    game.splash("THE BLUE GEM: ABILITY TO SHOOT OUT BASIC PROJECTILES WITH A BUTTON")
-    BASCSHOOT = true
-    game.splash("Now, enemies will spawn. Good luck! (if red squares looked wierd, it might be an enemy!)")
-    tiles.setCurrentTilemap(tilemap`level12`)
-    tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
-    // THE SHT IS NOT BAD WORD DO NOT QUESTION IT
-    shtbar = statusbars.create(20, 4, StatusBarKind.Magic)
-    shtbar.setLabel("SHOOT POWER")
-    shtbar.attachToSprite(playerSprite, 0, 0)
-    shtbar.value = shtbar.max
-    mySprite = sprites.create(img`
-        . . . . . . . . . . . . . . . 
-        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-        . 2 . . . . . . . . . . . 2 . 
-        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
-        . 2 . 2 . . . . . . . 2 . 2 . 
-        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
-        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
-        . 2 . 2 . 2 . 2 . 2 . 2 . 2 . 
-        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
-        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
-        . 2 . 2 . . . . . . . 2 . 2 . 
-        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
-        . 2 . . . . . . . . . . . 2 . 
-        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-        . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy)
-    tiles.placeOnRandomTile(mySprite, assets.tile`myTile4`)
-    playerSprite.setImage(assets.image`dot player STAGE 2`)
-})
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile0`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile5`)))) {
-        tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column - 1, playerSprite.tilemapLocation().row))
-    }
-})
-controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!(playerSprite.tileKindAt(TileDirection.Right, assets.tile`myTile22`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile1`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile7`)) || playerSprite.tileKindAt(TileDirection.Right, assets.tile`myTile11`)))) {
-        tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column + 1, playerSprite.tilemapLocation().row))
-    }
-})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, location) {
     game.splash("Congratulations, ", plrname)
     game.splash("You have collected a gem!")
@@ -112,6 +31,11 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, 
     statusbar = statusbars.create(20, 4, StatusBarKind.Health)
     statusbar.attachToSprite(playerSprite)
     GREENFIRE_BOSS.follow(playerSprite, 25)
+})
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile3`)))) {
+        tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column, playerSprite.tilemapLocation().row - 1))
+    }
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (BASCSHOOT) {
@@ -197,6 +121,82 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile0`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile5`)))) {
+        tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column - 1, playerSprite.tilemapLocation().row))
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile18`, function (sprite, location) {
+    game.splash("Congratulations, ", plrname)
+    game.splash("You have collected a gem!")
+    game.splash("THE RED GEM: INCREASE SHOOT METER RECOVERY SPEED")
+    XTRASHOOT = true
+    playerSprite.setImage(assets.image`dot player STAGE 3`)
+    tiles.setCurrentTilemap(tilemap`level14`)
+    tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
+    mySprite2 = sprites.create(img`
+        . . . . . . . . . . . . . . . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . 2 . . . . . . . . . . . 2 . 
+        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
+        . 2 . 2 . . . . . . . 2 . 2 . 
+        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
+        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
+        . 2 . 2 . 2 . 2 . 2 . 2 . 2 . 
+        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
+        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
+        . 2 . 2 . . . . . . . 2 . 2 . 
+        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
+        . 2 . . . . . . . . . . . 2 . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy)
+    tiles.placeOnRandomTile(mySprite2, assets.tile`myTile4`)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`level0`)
+    tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
+    game.splash("Keep going!")
+})
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (!(playerSprite.tileKindAt(TileDirection.Right, assets.tile`myTile22`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile1`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile7`)) || playerSprite.tileKindAt(TileDirection.Right, assets.tile`myTile11`)))) {
+        tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column + 1, playerSprite.tilemapLocation().row))
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite, location) {
+    game.splash("Congratulations, ", plrname)
+    game.splash("You have collected a gem!")
+    game.splash("Gems give you super powers!")
+    game.splash("THE BLUE GEM: ABILITY TO SHOOT OUT BASIC PROJECTILES WITH A BUTTON")
+    BASCSHOOT = true
+    game.splash("Now, enemies will spawn. Good luck! (if red squares looked wierd, it might be an enemy!)")
+    tiles.setCurrentTilemap(tilemap`level12`)
+    tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
+    // THE SHT IS NOT BAD WORD DO NOT QUESTION IT
+    shtbar = statusbars.create(20, 4, StatusBarKind.Magic)
+    shtbar.setLabel("SHOOT POWER")
+    shtbar.attachToSprite(playerSprite, 0, 0)
+    shtbar.value = shtbar.max
+    mySprite = sprites.create(img`
+        . . . . . . . . . . . . . . . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . 2 . . . . . . . . . . . 2 . 
+        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
+        . 2 . 2 . . . . . . . 2 . 2 . 
+        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
+        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
+        . 2 . 2 . 2 . 2 . 2 . 2 . 2 . 
+        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
+        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
+        . 2 . 2 . . . . . . . 2 . 2 . 
+        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
+        . 2 . . . . . . . . . . . 2 . 
+        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+        . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy)
+    tiles.placeOnRandomTile(mySprite, assets.tile`myTile4`)
+    playerSprite.setImage(assets.image`dot player STAGE 2`)
+})
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile1`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile0`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile6`)))) {
         tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column, playerSprite.tilemapLocation().row + 1))
@@ -218,13 +218,13 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
         }
     }
 })
+let mySprite: Sprite = null
+let mySprite2: Sprite = null
 let projectile: Sprite = null
+let shtbar: StatusBarSprite = null
 let statusbar: StatusBarSprite = null
 let GF_HEALTH: StatusBarSprite = null
 let GREENFIRE_BOSS: Sprite = null
-let mySprite: Sprite = null
-let shtbar: StatusBarSprite = null
-let mySprite2: Sprite = null
 let plrname = ""
 let playerSprite: Sprite = null
 let XTRASHOOT = false

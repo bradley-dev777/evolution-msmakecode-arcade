@@ -1,152 +1,4 @@
-def on_up_pressed():
-    if not (playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
-        myTile
-    """)) or (playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
-        myTile2
-    """)) or playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
-        myTile3
-    """)))):
-        tiles.place_on_tile(playerSprite,
-            tiles.get_tile_location(playerSprite.tilemap_location().column,
-                playerSprite.tilemap_location().row - 1))
-controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
-
 def on_overlap_tile(sprite, location):
-    tiles.set_current_tilemap(tilemap("""
-        level0
-    """))
-    tiles.place_on_random_tile(playerSprite, assets.tile("""
-        myTile10
-    """))
-    game.splash("Keep going!")
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile16
-    """),
-    on_overlap_tile)
-
-def on_overlap_tile2(sprite2, location2):
-    global XTRASHOOT, mySprite2
-    game.splash("Congratulations, ", plrname)
-    game.splash("You have collected a gem!")
-    game.splash("THE RED GEM: INCREASE SHOOT METER RECOVERY SPEED")
-    XTRASHOOT = True
-    playerSprite.set_image(assets.image("""
-        dot player STAGE 3
-    """))
-    tiles.set_current_tilemap(tilemap("""
-        level14
-    """))
-    tiles.place_on_random_tile(playerSprite, assets.tile("""
-        myTile10
-    """))
-    mySprite2 = sprites.create(img("""
-            . . . . . . . . . . . . . . . 
-                    . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-                    . 2 . . . . . . . . . . . 2 . 
-                    . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
-                    . 2 . 2 . . . . . . . 2 . 2 . 
-                    . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
-                    . 2 . 2 . 2 . . . 2 . 2 . 2 . 
-                    . 2 . 2 . 2 . 2 . 2 . 2 . 2 . 
-                    . 2 . 2 . 2 . . . 2 . 2 . 2 . 
-                    . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
-                    . 2 . 2 . . . . . . . 2 . 2 . 
-                    . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
-                    . 2 . . . . . . . . . . . 2 . 
-                    . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-                    . . . . . . . . . . . . . . .
-        """),
-        SpriteKind.enemy)
-    tiles.place_on_random_tile(mySprite2, assets.tile("""
-        myTile4
-    """))
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile18
-    """),
-    on_overlap_tile2)
-
-def on_overlap_tile3(sprite3, location3):
-    global BASCSHOOT, shtbar, mySprite
-    game.splash("Congratulations, ", plrname)
-    game.splash("You have collected a gem!")
-    game.splash("Gems give you super powers!")
-    game.splash("THE BLUE GEM: ABILITY TO SHOOT OUT BASIC PROJECTILES WITH A BUTTON")
-    BASCSHOOT = True
-    game.splash("Now, enemies will spawn. Good luck! (if red squares looked wierd, it might be an enemy!)")
-    tiles.set_current_tilemap(tilemap("""
-        level12
-    """))
-    tiles.place_on_random_tile(playerSprite, assets.tile("""
-        myTile10
-    """))
-    # THE SHT IS NOT BAD WORD DO NOT QUESTION IT
-    shtbar = statusbars.create(20, 4, StatusBarKind.magic)
-    shtbar.set_label("SHOOT POWER")
-    shtbar.attach_to_sprite(playerSprite, 0, 0)
-    shtbar.value = shtbar.max
-    mySprite = sprites.create(img("""
-            . . . . . . . . . . . . . . . 
-                    . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-                    . 2 . . . . . . . . . . . 2 . 
-                    . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
-                    . 2 . 2 . . . . . . . 2 . 2 . 
-                    . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
-                    . 2 . 2 . 2 . . . 2 . 2 . 2 . 
-                    . 2 . 2 . 2 . 2 . 2 . 2 . 2 . 
-                    . 2 . 2 . 2 . . . 2 . 2 . 2 . 
-                    . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
-                    . 2 . 2 . . . . . . . 2 . 2 . 
-                    . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
-                    . 2 . . . . . . . . . . . 2 . 
-                    . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-                    . . . . . . . . . . . . . . .
-        """),
-        SpriteKind.enemy)
-    tiles.place_on_random_tile(mySprite, assets.tile("""
-        myTile4
-    """))
-    playerSprite.set_image(assets.image("""
-        dot player STAGE 2
-    """))
-scene.on_overlap_tile(SpriteKind.player,
-    assets.tile("""
-        myTile17
-    """),
-    on_overlap_tile3)
-
-def on_left_pressed():
-    if not (playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
-        myTile
-    """)) or (playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
-        myTile0
-    """)) or playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
-        myTile5
-    """)))):
-        tiles.place_on_tile(playerSprite,
-            tiles.get_tile_location(playerSprite.tilemap_location().column - 1,
-                playerSprite.tilemap_location().row))
-controller.left.on_event(ControllerButtonEvent.PRESSED, on_left_pressed)
-
-def on_right_pressed():
-    if not (playerSprite.tile_kind_at(TileDirection.RIGHT, assets.tile("""
-        myTile22
-    """)) or (playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
-        myTile1
-    """)) or (playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
-        myTile2
-    """)) or playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
-        myTile7
-    """))) or playerSprite.tile_kind_at(TileDirection.RIGHT, assets.tile("""
-        myTile11
-    """)))):
-        tiles.place_on_tile(playerSprite,
-            tiles.get_tile_location(playerSprite.tilemap_location().column + 1,
-                playerSprite.tilemap_location().row))
-controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
-
-def on_overlap_tile4(sprite4, location4):
     global XTRASHOOT, GREENFIRE_BOSS, GF_HEALTH, statusbar
     game.splash("Congratulations, ", plrname)
     game.splash("You have collected a gem!")
@@ -193,7 +45,20 @@ scene.on_overlap_tile(SpriteKind.player,
     assets.tile("""
         myTile19
     """),
-    on_overlap_tile4)
+    on_overlap_tile)
+
+def on_up_pressed():
+    if not (playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
+        myTile
+    """)) or (playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
+        myTile2
+    """)) or playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
+        myTile3
+    """)))):
+        tiles.place_on_tile(playerSprite,
+            tiles.get_tile_location(playerSprite.tilemap_location().column,
+                playerSprite.tilemap_location().row - 1))
+controller.up.on_event(ControllerButtonEvent.PRESSED, on_up_pressed)
 
 def on_a_pressed():
     global projectile
@@ -290,6 +155,141 @@ def on_a_pressed():
                     50)
 controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
 
+def on_left_pressed():
+    if not (playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
+        myTile
+    """)) or (playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
+        myTile0
+    """)) or playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
+        myTile5
+    """)))):
+        tiles.place_on_tile(playerSprite,
+            tiles.get_tile_location(playerSprite.tilemap_location().column - 1,
+                playerSprite.tilemap_location().row))
+controller.left.on_event(ControllerButtonEvent.PRESSED, on_left_pressed)
+
+def on_overlap_tile2(sprite2, location2):
+    global XTRASHOOT, mySprite2
+    game.splash("Congratulations, ", plrname)
+    game.splash("You have collected a gem!")
+    game.splash("THE RED GEM: INCREASE SHOOT METER RECOVERY SPEED")
+    XTRASHOOT = True
+    playerSprite.set_image(assets.image("""
+        dot player STAGE 3
+    """))
+    tiles.set_current_tilemap(tilemap("""
+        level14
+    """))
+    tiles.place_on_random_tile(playerSprite, assets.tile("""
+        myTile10
+    """))
+    mySprite2 = sprites.create(img("""
+            . . . . . . . . . . . . . . . 
+                    . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+                    . 2 . . . . . . . . . . . 2 . 
+                    . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
+                    . 2 . 2 . . . . . . . 2 . 2 . 
+                    . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
+                    . 2 . 2 . 2 . . . 2 . 2 . 2 . 
+                    . 2 . 2 . 2 . 2 . 2 . 2 . 2 . 
+                    . 2 . 2 . 2 . . . 2 . 2 . 2 . 
+                    . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
+                    . 2 . 2 . . . . . . . 2 . 2 . 
+                    . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
+                    . 2 . . . . . . . . . . . 2 . 
+                    . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+                    . . . . . . . . . . . . . . .
+        """),
+        SpriteKind.enemy)
+    tiles.place_on_random_tile(mySprite2, assets.tile("""
+        myTile4
+    """))
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile18
+    """),
+    on_overlap_tile2)
+
+def on_overlap_tile3(sprite3, location3):
+    tiles.set_current_tilemap(tilemap("""
+        level0
+    """))
+    tiles.place_on_random_tile(playerSprite, assets.tile("""
+        myTile10
+    """))
+    game.splash("Keep going!")
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile16
+    """),
+    on_overlap_tile3)
+
+def on_right_pressed():
+    if not (playerSprite.tile_kind_at(TileDirection.RIGHT, assets.tile("""
+        myTile22
+    """)) or (playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
+        myTile1
+    """)) or (playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
+        myTile2
+    """)) or playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
+        myTile7
+    """))) or playerSprite.tile_kind_at(TileDirection.RIGHT, assets.tile("""
+        myTile11
+    """)))):
+        tiles.place_on_tile(playerSprite,
+            tiles.get_tile_location(playerSprite.tilemap_location().column + 1,
+                playerSprite.tilemap_location().row))
+controller.right.on_event(ControllerButtonEvent.PRESSED, on_right_pressed)
+
+def on_overlap_tile4(sprite4, location4):
+    global BASCSHOOT, shtbar, mySprite
+    game.splash("Congratulations, ", plrname)
+    game.splash("You have collected a gem!")
+    game.splash("Gems give you super powers!")
+    game.splash("THE BLUE GEM: ABILITY TO SHOOT OUT BASIC PROJECTILES WITH A BUTTON")
+    BASCSHOOT = True
+    game.splash("Now, enemies will spawn. Good luck! (if red squares looked wierd, it might be an enemy!)")
+    tiles.set_current_tilemap(tilemap("""
+        level12
+    """))
+    tiles.place_on_random_tile(playerSprite, assets.tile("""
+        myTile10
+    """))
+    # THE SHT IS NOT BAD WORD DO NOT QUESTION IT
+    shtbar = statusbars.create(20, 4, StatusBarKind.magic)
+    shtbar.set_label("SHOOT POWER")
+    shtbar.attach_to_sprite(playerSprite, 0, 0)
+    shtbar.value = shtbar.max
+    mySprite = sprites.create(img("""
+            . . . . . . . . . . . . . . . 
+                    . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+                    . 2 . . . . . . . . . . . 2 . 
+                    . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
+                    . 2 . 2 . . . . . . . 2 . 2 . 
+                    . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
+                    . 2 . 2 . 2 . . . 2 . 2 . 2 . 
+                    . 2 . 2 . 2 . 2 . 2 . 2 . 2 . 
+                    . 2 . 2 . 2 . . . 2 . 2 . 2 . 
+                    . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
+                    . 2 . 2 . . . . . . . 2 . 2 . 
+                    . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
+                    . 2 . . . . . . . . . . . 2 . 
+                    . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
+                    . . . . . . . . . . . . . . .
+        """),
+        SpriteKind.enemy)
+    tiles.place_on_random_tile(mySprite, assets.tile("""
+        myTile4
+    """))
+    playerSprite.set_image(assets.image("""
+        dot player STAGE 2
+    """))
+scene.on_overlap_tile(SpriteKind.player,
+    assets.tile("""
+        myTile17
+    """),
+    on_overlap_tile4)
+
 def on_down_pressed():
     if not (playerSprite.tile_kind_at(TileDirection.CENTER, assets.tile("""
         myTile1
@@ -323,13 +323,13 @@ def on_on_overlap(sprite5, otherSprite):
             game.game_over(True)
 sprites.on_overlap(SpriteKind.projectile, SpriteKind.enemy, on_on_overlap)
 
+mySprite: Sprite = None
+mySprite2: Sprite = None
 projectile: Sprite = None
+shtbar: StatusBarSprite = None
 statusbar: StatusBarSprite = None
 GF_HEALTH: StatusBarSprite = None
 GREENFIRE_BOSS: Sprite = None
-mySprite: Sprite = None
-shtbar: StatusBarSprite = None
-mySprite2: Sprite = None
 plrname = ""
 playerSprite: Sprite = None
 XTRASHOOT = False
