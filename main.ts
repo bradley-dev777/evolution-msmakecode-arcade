@@ -169,7 +169,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite, 
     game.splash("Gems give you super powers!")
     game.splash("THE BLUE GEM: ABILITY TO SHOOT OUT BASIC PROJECTILES WITH A BUTTON")
     BASCSHOOT = true
-    game.splash("Now, enemies will spawn. Good luck! ")
+    game.splash("Now, enemies will spawn. Good luck! (if red squares looked wierd, it might be an enemy!)")
     tiles.setCurrentTilemap(tilemap`level12`)
     tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
     // THE SHT IS NOT BAD WORD DO NOT QUESTION IT
