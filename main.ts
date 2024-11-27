@@ -467,7 +467,7 @@ let XTRASHOOT = false
 let BASCSHOOT = false
 if (info.highScore() == 0) {
     game.splash("reloading...")
-    info.setScore(1e+24)
+    info.setScore(10000)
     game.gameOver(false)
 }
 game.setGameOverScoringType(game.ScoringType.LowScore)
