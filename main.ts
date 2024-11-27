@@ -465,12 +465,12 @@ let playerSprite: Sprite = null
 let dmgCd = false
 let XTRASHOOT = false
 let BASCSHOOT = false
+game.setGameOverScoringType(game.ScoringType.LowScore)
 if (info.highScore() == 0) {
     game.splash("reloading...")
     info.setScore(10000)
-    game.gameOver(false)
+    game.gameOver(true)
 }
-game.setGameOverScoringType(game.ScoringType.LowScore)
 BASCSHOOT = false
 XTRASHOOT = false
 dmgCd = false
