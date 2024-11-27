@@ -1,12 +1,330 @@
+function _ (text: string) {
+	
+}
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, location) {
+    game.splash("Congratulations, ", plrname)
+    game.splash("You have collected a gem!")
+    game.splash("THE TURQUOISE GEM: UNLOCK BOSS LEVEL")
+    game.splash("Up front is Greenfire , the evil snake. Good luck!")
+    XTRASHOOT = true
+    playerSprite.setImage(assets.image`myImage`)
+    tiles.setCurrentTilemap(tilemap`level16`)
+    tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
+    GREENFIRE_BOSS = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy)
+    tiles.placeOnRandomTile(GREENFIRE_BOSS, assets.tile`myTile4`)
+    GF_HEALTH = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
+    GF_HEALTH.attachToSprite(GREENFIRE_BOSS)
+    GREENFIRE_BOSS.follow(playerSprite, 10)
+})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile3`)))) {
         tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column, playerSprite.tilemapLocation().row - 1))
     }
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite, location) {
-    tiles.setCurrentTilemap(tilemap`level0`)
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    pause(5000)
+    if (controller.B.isPressed()) {
+        tiles.setCurrentTilemap(tilemap`level`)
+    }
     tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
-    game.splash("Keep going!")
+    hdlvenemies = [
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy),
+    sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Enemy)
+    ]
+    for (let value of hdlvenemies) {
+        tiles.placeOnRandomTile(value, assets.tile`myTile4`)
+    }
+    des = 0
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (BASCSHOOT) {
+        if (0 < shtbar.value) {
+            shtbar.value += -1
+            if (controller.right.isPressed()) {
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, playerSprite, 50, 0)
+            } else if (controller.left.isPressed()) {
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, playerSprite, -50, 0)
+            } else if (controller.up.isPressed()) {
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, playerSprite, 0, -50)
+            } else if (controller.down.isPressed()) {
+                projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, playerSprite, 0, 50)
+            }
+        }
+    }
+    if (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile21`)) {
+        tiles.placeOnRandomTile(playerSprite, assets.tile`myTile21`)
+    }
+})
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile0`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile5`)))) {
+        tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column - 1, playerSprite.tilemapLocation().row))
+    }
+})
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Enemy, function (sprite, otherSprite) {
+    tiles.placeOnRandomTile(sprite, assets.tile`myTile4`)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile18`, function (sprite, location) {
     game.splash("Congratulations, ", plrname)
@@ -17,26 +335,43 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile18`, function (sprite, 
     tiles.setCurrentTilemap(tilemap`level14`)
     tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
     mySprite2 = sprites.create(img`
-        . . . . . . . . . . . . . . . 
-        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-        . 2 . . . . . . . . . . . 2 . 
-        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
-        . 2 . 2 . . . . . . . 2 . 2 . 
-        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
-        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
-        . 2 . 2 . 2 . 2 . 2 . 2 . 2 . 
-        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
-        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
-        . 2 . 2 . . . . . . . 2 . 2 . 
-        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
-        . 2 . . . . . . . . . . . 2 . 
-        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
         `, SpriteKind.Enemy)
     tiles.placeOnRandomTile(mySprite2, assets.tile`myTile4`)
 })
 statusbars.onZero(StatusBarKind.Health, function (status) {
     game.gameOver(false)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite, location) {
+    tiles.setCurrentTilemap(tilemap`level0`)
+    tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
+    game.splash("Keep going!")
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile20`, function (sprite, location) {
+    info.setScore(game.runtime() / 1000)
+    game.setGameOverEffect(true, effects.starField)
+    game.setGameOverMessage(true, "YOU WON!!! TIME:" + info.score() + "SECONDS")
+    game.gameOver(true)
+})
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (!(playerSprite.tileKindAt(TileDirection.Right, assets.tile`myTile22`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile1`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile7`)) || playerSprite.tileKindAt(TileDirection.Right, assets.tile`myTile11`)))) {
+        tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column + 1, playerSprite.tilemapLocation().row))
+    }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite, location) {
     game.splash("Congratulations, ", plrname)
@@ -53,150 +388,33 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite, 
     shtbar.attachToSprite(playerSprite, 0, 0)
     shtbar.value = shtbar.max
     mySprite = sprites.create(img`
-        . . . . . . . . . . . . . . . 
-        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-        . 2 . . . . . . . . . . . 2 . 
-        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
-        . 2 . 2 . . . . . . . 2 . 2 . 
-        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
-        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
-        . 2 . 2 . 2 . 2 . 2 . 2 . 2 . 
-        . 2 . 2 . 2 . . . 2 . 2 . 2 . 
-        . 2 . 2 . 2 2 2 2 2 . 2 . 2 . 
-        . 2 . 2 . . . . . . . 2 . 2 . 
-        . 2 . 2 2 2 2 2 2 2 2 2 . 2 . 
-        . 2 . . . . . . . . . . . 2 . 
-        . 2 2 2 2 2 2 2 2 2 2 2 2 2 . 
-        . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
         `, SpriteKind.Enemy)
     tiles.placeOnRandomTile(mySprite, assets.tile`myTile4`)
     playerSprite.setImage(assets.image`dot player STAGE 2`)
 })
-controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile0`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile5`)))) {
-        tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column - 1, playerSprite.tilemapLocation().row))
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
+    if (!(dmgCd)) {
+        dmgCd = true
+        statusbar.value += -5
+        pauseUntil(() => !(sprite.overlapsWith(otherSprite)))
     }
-})
-controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!(playerSprite.tileKindAt(TileDirection.Right, assets.tile`myTile22`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile1`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile7`)) || playerSprite.tileKindAt(TileDirection.Right, assets.tile`myTile11`)))) {
-        tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column + 1, playerSprite.tilemapLocation().row))
-    }
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, location) {
-    game.splash("Congratulations, ", plrname)
-    game.splash("You have collected a gem!")
-    game.splash("THE TURQUOISE GEM: UNLOCK BOSS LEVEL")
-    game.splash("Up front is Greenfire , the evil snake. Good luck!")
-    XTRASHOOT = true
-    playerSprite.setImage(assets.image`myImage`)
-    tiles.setCurrentTilemap(tilemap`level16`)
-    tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
-    GREENFIRE_BOSS = sprites.create(img`
-        5 5 5 5 5 c c c c c c c 5 5 5 5 
-        5 5 5 5 c 6 7 7 7 7 7 6 c 5 5 5 
-        5 5 5 c 7 c 6 6 6 6 c 7 6 c 5 5 
-        5 5 c 6 7 6 f 6 6 f 6 7 7 c 5 5 
-        5 5 c 7 7 7 7 7 7 7 7 7 7 c 5 5 
-        5 5 4 4 4 1 f f 1 6 7 7 7 f 5 5 
-        5 4 4 5 5 1 f f 1 f 7 7 7 f 5 5 
-        4 5 5 4 4 2 2 2 2 f 7 7 6 f 5 5 
-        5 4 4 5 5 2 2 2 2 7 7 6 f c 5 5 
-        5 c 4 4 4 7 7 7 7 7 c c 7 7 c 5 
-        c 7 1 1 1 7 7 7 7 f c 6 7 7 7 c 
-        f 1 1 1 1 1 7 6 f c c 6 6 6 c c 
-        f 1 1 1 1 1 1 6 6 c 6 6 6 c 5 5 
-        f 6 1 1 1 1 1 6 6 6 6 6 6 c 5 5 
-        5 f 6 1 1 1 1 1 6 6 6 6 c 5 5 5 
-        5 5 f f c c c c c c c c 5 5 5 5 
-        `, SpriteKind.Enemy)
-    tiles.placeOnRandomTile(GREENFIRE_BOSS, assets.tile`myTile4`)
-    GF_HEALTH = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
-    GF_HEALTH.attachToSprite(GREENFIRE_BOSS)
-    GREENFIRE_BOSS.follow(playerSprite, 10)
-})
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (BASCSHOOT) {
-        if (0 < shtbar.value) {
-            shtbar.value += -1
-            if (controller.right.isPressed()) {
-                projectile = sprites.createProjectileFromSprite(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . 9 9 . . . . . . . 
-                    . . . . . . 9 9 9 9 . . . . . . 
-                    . . . . . . 9 9 9 9 . . . . . . 
-                    . . . . . . . 9 9 . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `, playerSprite, 50, 0)
-            } else if (controller.left.isPressed()) {
-                projectile = sprites.createProjectileFromSprite(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . 9 9 . . . . . . . 
-                    . . . . . . 9 9 9 9 . . . . . . 
-                    . . . . . . 9 9 9 9 . . . . . . 
-                    . . . . . . . 9 9 . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `, playerSprite, -50, 0)
-            } else if (controller.up.isPressed()) {
-                projectile = sprites.createProjectileFromSprite(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . 9 9 . . . . . . . 
-                    . . . . . . 9 9 9 9 . . . . . . 
-                    . . . . . . 9 9 9 9 . . . . . . 
-                    . . . . . . . 9 9 . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `, playerSprite, 0, -50)
-            } else if (controller.down.isPressed()) {
-                projectile = sprites.createProjectileFromSprite(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . 9 9 . . . . . . . 
-                    . . . . . . 9 9 9 9 . . . . . . 
-                    . . . . . . 9 9 9 9 . . . . . . 
-                    . . . . . . . 9 9 . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `, playerSprite, 0, 50)
-            }
-        }
-    }
+    dmgCd = false
 })
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile1`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile0`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile6`)) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile10`))) {
@@ -207,9 +425,11 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
     if (otherSprite == mySprite) {
         tiles.setCurrentTilemap(tilemap`level9`)
         sprites.destroy(otherSprite, effects.fire, 500)
+        sprites.destroy(sprite, effects.coolRadial, 500)
     } else if (otherSprite == mySprite2) {
         tiles.setCurrentTilemap(tilemap`level15`)
         sprites.destroy(otherSprite, effects.fire, 500)
+        sprites.destroy(sprite, effects.coolRadial, 500)
     } else if (otherSprite == GREENFIRE_BOSS) {
         GF_HEALTH.value += -1
         if (GF_HEALTH.value == 0) {
@@ -218,22 +438,27 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
             game.setGameOverMessage(true, "YOU WON!!! TIME:" + info.score() + "SECONDS")
             game.gameOver(true)
         }
+    } else {
+        sprites.destroy(otherSprite, effects.fire, 500)
+        sprites.destroy(sprite, effects.coolRadial, 500)
+        for (let value of hdlvenemies) {
+            if (spriteutils.isDestroyed(value)) {
+                des += 1
+            }
+            if (des == 10) {
+                tiles.setCurrentTilemap(tilemap`level17`)
+            }
+        }
     }
 })
-sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
-    if (!(dmgCd)) {
-        dmgCd = true
-        statusbar.value += -5
-        pauseUntil(() => !(sprite.overlapsWith(otherSprite)))
-    }
-    dmgCd = false
-})
+let mySprite: Sprite = null
+let mySprite2: Sprite = null
 let projectile: Sprite = null
+let shtbar: StatusBarSprite = null
+let des = 0
+let hdlvenemies: Sprite[] = []
 let GF_HEALTH: StatusBarSprite = null
 let GREENFIRE_BOSS: Sprite = null
-let mySprite: Sprite = null
-let shtbar: StatusBarSprite = null
-let mySprite2: Sprite = null
 let statusbar: StatusBarSprite = null
 let plrname = ""
 let playerSprite: Sprite = null
