@@ -11,22 +11,22 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, 
     tiles.setCurrentTilemap(tilemap`level16`)
     tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
     GREENFIRE_BOSS = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
+        . . . . . c c c c c c c . . . . 
+        . . . . c 6 7 7 7 7 7 6 c . . . 
+        . . . c 7 c 6 6 6 6 c 7 6 c . . 
+        . . c 6 7 6 f 6 6 f 6 7 7 c . . 
+        . . 4 4 4 7 7 7 7 7 7 7 7 c . . 
+        . 4 5 5 5 1 f f 1 6 7 7 7 f . . 
+        4 5 5 2 2 1 f f 1 f 7 7 7 f . . 
+        4 5 5 2 2 2 2 2 2 f 7 7 6 f . . 
+        . 4 5 5 5 2 2 2 2 7 7 6 f c . . 
+        . c 4 4 4 7 7 7 7 7 c c 7 7 c . 
+        c 7 1 1 1 7 7 7 7 f c 6 7 7 7 c 
+        f 1 1 1 1 1 7 6 f c c 6 6 6 c c 
+        f 1 1 1 1 1 1 6 6 c 6 6 6 c . . 
+        f 6 1 1 1 1 1 6 6 6 6 6 6 c . . 
+        . f 6 1 1 1 1 1 6 6 6 6 c . . . 
+        . . f f c c c c c c c c . . . . 
         `, SpriteKind.Enemy)
     tiles.placeOnRandomTile(GREENFIRE_BOSS, assets.tile`myTile4`)
     GF_HEALTH = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
@@ -35,7 +35,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, 
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile3`)))) {
-        tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column, playerSprite.tilemapLocation().row - 1))
+        playerSprite.y += -1
     }
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -45,191 +45,26 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     }
     tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
     hdlvenemies = [
-    sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy),
-    sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy),
-    sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy),
-    sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy),
-    sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy),
-    sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy),
-    sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy),
-    sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy),
-    sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy),
-    sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy)
+    sprites.create(assets.image`ENEMYASSETIMAGE`, SpriteKind.Enemy),
+    sprites.create(assets.image`ENEMYASSETIMAGE`, SpriteKind.Enemy),
+    sprites.create(assets.image`ENEMYASSETIMAGE`, SpriteKind.Enemy),
+    sprites.create(assets.image`ENEMYASSETIMAGE`, SpriteKind.Enemy),
+    sprites.create(assets.image`ENEMYASSETIMAGE`, SpriteKind.Enemy),
+    sprites.create(assets.image`ENEMYASSETIMAGE`, SpriteKind.Enemy),
+    sprites.create(assets.image`ENEMYASSETIMAGE`, SpriteKind.Enemy),
+    sprites.create(assets.image`ENEMYASSETIMAGE`, SpriteKind.Enemy),
+    sprites.create(assets.image`ENEMYASSETIMAGE`, SpriteKind.Enemy),
+    sprites.create(assets.image`ENEMYASSETIMAGE`, SpriteKind.Enemy)
     ]
     for (let value of hdlvenemies) {
         tiles.placeOnRandomTile(value, assets.tile`myTile4`)
     }
     des = 0
+})
+controller.up.onEvent(ControllerButtonEvent.Repeated, function () {
+    if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile3`)))) {
+        playerSprite.y += -1
+    }
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (BASCSHOOT) {
@@ -241,13 +76,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
+                    . . . . . 9 9 9 9 9 . . . . . . 
+                    . . . . 9 . . . . . 9 . . . . . 
+                    . . . . 9 . 9 9 9 . 9 . . . . . 
+                    . . . . 9 . 9 . 9 . 9 . . . . . 
+                    . . . . 9 . 9 9 9 . 9 . . . . . 
+                    . . . . 9 . . . . . 9 . . . . . 
+                    . . . . . 9 9 9 9 9 . . . . . . 
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
@@ -260,13 +95,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
+                    . . . . . 9 9 9 9 9 . . . . . . 
+                    . . . . 9 . . . . . 9 . . . . . 
+                    . . . . 9 . 9 9 9 . 9 . . . . . 
+                    . . . . 9 . 9 . 9 . 9 . . . . . 
+                    . . . . 9 . 9 9 9 . 9 . . . . . 
+                    . . . . 9 . . . . . 9 . . . . . 
+                    . . . . . 9 9 9 9 9 . . . . . . 
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
@@ -279,13 +114,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
+                    . . . . . 9 9 9 9 9 . . . . . . 
+                    . . . . 9 . . . . . 9 . . . . . 
+                    . . . . 9 . 9 9 9 . 9 . . . . . 
+                    . . . . 9 . 9 . 9 . 9 . . . . . 
+                    . . . . 9 . 9 9 9 . 9 . . . . . 
+                    . . . . 9 . . . . . 9 . . . . . 
+                    . . . . . 9 9 9 9 9 . . . . . . 
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
@@ -298,13 +133,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
+                    . . . . . 9 9 9 9 9 . . . . . . 
+                    . . . . 9 . . . . . 9 . . . . . 
+                    . . . . 9 . 9 9 9 . 9 . . . . . 
+                    . . . . 9 . 9 . 9 . 9 . . . . . 
+                    . . . . 9 . 9 9 9 . 9 . . . . . 
+                    . . . . 9 . . . . . 9 . . . . . 
+                    . . . . . 9 9 9 9 9 . . . . . . 
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
                     . . . . . . . . . . . . . . . . 
@@ -318,9 +153,14 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         tiles.placeOnRandomTile(playerSprite, assets.tile`myTile21`)
     }
 })
+controller.right.onEvent(ControllerButtonEvent.Repeated, function () {
+    if (!(playerSprite.tileKindAt(TileDirection.Right, assets.tile`myTile22`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile1`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile7`)) || playerSprite.tileKindAt(TileDirection.Right, assets.tile`myTile11`)))) {
+        playerSprite.x += 1
+    }
+})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile0`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile5`)))) {
-        tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column - 1, playerSprite.tilemapLocation().row))
+        playerSprite.x += -1
     }
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Enemy, function (sprite, otherSprite) {
@@ -334,25 +174,12 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile18`, function (sprite, 
     playerSprite.setImage(assets.image`dot player STAGE 3`)
     tiles.setCurrentTilemap(tilemap`level14`)
     tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
-    mySprite2 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy)
+    mySprite2 = sprites.create(assets.image`ENEMYASSETIMAGE`, SpriteKind.Enemy)
     tiles.placeOnRandomTile(mySprite2, assets.tile`myTile4`)
+    mysprite3 = sprites.create(assets.image`ENEMYASSETIMAGE`, SpriteKind.Enemy)
+    tiles.placeOnRandomTile(mysprite3, assets.tile`myTile4`)
+    mysprite4 = sprites.create(assets.image`ENEMYASSETIMAGE`, SpriteKind.Enemy)
+    tiles.placeOnRandomTile(mysprite4, assets.tile`myTile4`)
 })
 statusbars.onZero(StatusBarKind.Health, function (status) {
     game.gameOver(false)
@@ -370,7 +197,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile20`, function (sprite, 
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(playerSprite.tileKindAt(TileDirection.Right, assets.tile`myTile22`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile1`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile2`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile7`)) || playerSprite.tileKindAt(TileDirection.Right, assets.tile`myTile11`)))) {
-        tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column + 1, playerSprite.tilemapLocation().row))
+        playerSprite.x += 1
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite, location) {
@@ -387,24 +214,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite, 
     shtbar.setLabel("SHOOT POWER")
     shtbar.attachToSprite(playerSprite, 0, 0)
     shtbar.value = shtbar.max
-    mySprite = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy)
+    mySprite = sprites.create(assets.image`ENEMYASSETIMAGE`, SpriteKind.Enemy)
     tiles.placeOnRandomTile(mySprite, assets.tile`myTile4`)
     playerSprite.setImage(assets.image`dot player STAGE 2`)
 })
@@ -416,9 +226,14 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
     }
     dmgCd = false
 })
+controller.down.onEvent(ControllerButtonEvent.Repeated, function () {
+    if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile1`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile0`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile6`)) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile10`))) {
+        playerSprite.y += 1
+    }
+})
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile1`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile0`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile6`)) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile10`))) {
-        tiles.placeOnTile(playerSprite, tiles.getTileLocation(playerSprite.tilemapLocation().column, playerSprite.tilemapLocation().row + 1))
+        playerSprite.y += 1
     }
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
@@ -451,7 +266,14 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
         }
     }
 })
+controller.left.onEvent(ControllerButtonEvent.Repeated, function () {
+    if (!(playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile`) || (playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile0`) || playerSprite.tileKindAt(TileDirection.Center, assets.tile`myTile5`)))) {
+        playerSprite.x += -1
+    }
+})
 let mySprite: Sprite = null
+let mysprite4: Sprite = null
+let mysprite3: Sprite = null
 let mySprite2: Sprite = null
 let projectile: Sprite = null
 let shtbar: StatusBarSprite = null
@@ -465,12 +287,12 @@ let playerSprite: Sprite = null
 let dmgCd = false
 let XTRASHOOT = false
 let BASCSHOOT = false
-game.setGameOverScoringType(game.ScoringType.LowScore)
 if (info.highScore() == 0) {
     game.splash("reloading...")
     info.setScore(10000)
     game.gameOver(true)
 }
+game.setGameOverScoringType(game.ScoringType.LowScore)
 BASCSHOOT = false
 XTRASHOOT = false
 dmgCd = false
