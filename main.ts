@@ -10,24 +10,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, 
     playerSprite.setImage(assets.image`myImage`)
     tiles.setCurrentTilemap(tilemap`level16`)
     tiles.placeOnRandomTile(playerSprite, assets.tile`myTile10`)
-    GREENFIRE_BOSS = sprites.create(img`
-        . . . . . c c c c c c c . . . . 
-        . . . . c 6 7 7 7 7 7 6 c . . . 
-        . . . c 7 c 6 6 6 6 c 7 6 c . . 
-        . . c 6 7 6 f 6 6 f 6 7 7 c . . 
-        . . 4 4 4 7 7 7 7 7 7 7 7 c . . 
-        . 4 5 5 5 1 f f 1 6 7 7 7 f . . 
-        4 5 5 2 2 1 f f 1 f 7 7 7 f . . 
-        4 5 5 2 2 2 2 2 2 f 7 7 6 f . . 
-        . 4 5 5 5 2 2 2 2 7 7 6 f c . . 
-        . c 4 4 4 7 7 7 7 7 c c 7 7 c . 
-        c 7 1 1 1 7 7 7 7 f c 6 7 7 7 c 
-        f 1 1 1 1 1 7 6 f c c 6 6 6 c c 
-        f 1 1 1 1 1 1 6 6 c 6 6 6 c . . 
-        f 6 1 1 1 1 1 6 6 6 6 6 6 c . . 
-        . f 6 1 1 1 1 1 6 6 6 6 c . . . 
-        . . f f c c c c c c c c . . . . 
-        `, SpriteKind.Enemy)
+    GREENFIRE_BOSS = sprites.create(assets.image`BOSS`, SpriteKind.Enemy)
     tiles.placeOnRandomTile(GREENFIRE_BOSS, assets.tile`myTile4`)
     GF_HEALTH = statusbars.create(20, 4, StatusBarKind.EnemyHealth)
     GF_HEALTH.attachToSprite(GREENFIRE_BOSS)
@@ -71,81 +54,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         if (0 < shtbar.value) {
             shtbar.value += -1
             if (controller.right.isPressed()) {
-                projectile = sprites.createProjectileFromSprite(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . 9 9 9 9 9 . . . . . . 
-                    . . . . 9 . . . . . 9 . . . . . 
-                    . . . . 9 . 9 9 9 . 9 . . . . . 
-                    . . . . 9 . 9 . 9 . 9 . . . . . 
-                    . . . . 9 . 9 9 9 . 9 . . . . . 
-                    . . . . 9 . . . . . 9 . . . . . 
-                    . . . . . 9 9 9 9 9 . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `, playerSprite, 50, 0)
+                projectile = sprites.createProjectileFromSprite(assets.image`PROJ`, playerSprite, 50, 0)
             } else if (controller.left.isPressed()) {
-                projectile = sprites.createProjectileFromSprite(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . 9 9 9 9 9 . . . . . . 
-                    . . . . 9 . . . . . 9 . . . . . 
-                    . . . . 9 . 9 9 9 . 9 . . . . . 
-                    . . . . 9 . 9 . 9 . 9 . . . . . 
-                    . . . . 9 . 9 9 9 . 9 . . . . . 
-                    . . . . 9 . . . . . 9 . . . . . 
-                    . . . . . 9 9 9 9 9 . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `, playerSprite, -50, 0)
+                projectile = sprites.createProjectileFromSprite(assets.image`PROJ`, playerSprite, -50, 0)
             } else if (controller.up.isPressed()) {
-                projectile = sprites.createProjectileFromSprite(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . 9 9 9 9 9 . . . . . . 
-                    . . . . 9 . . . . . 9 . . . . . 
-                    . . . . 9 . 9 9 9 . 9 . . . . . 
-                    . . . . 9 . 9 . 9 . 9 . . . . . 
-                    . . . . 9 . 9 9 9 . 9 . . . . . 
-                    . . . . 9 . . . . . 9 . . . . . 
-                    . . . . . 9 9 9 9 9 . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `, playerSprite, 0, -50)
+                projectile = sprites.createProjectileFromSprite(assets.image`PROJ`, playerSprite, 0, -50)
             } else if (controller.down.isPressed()) {
-                projectile = sprites.createProjectileFromSprite(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . 9 9 9 9 9 . . . . . . 
-                    . . . . 9 . . . . . 9 . . . . . 
-                    . . . . 9 . 9 9 9 . 9 . . . . . 
-                    . . . . 9 . 9 . 9 . 9 . . . . . 
-                    . . . . 9 . 9 9 9 . 9 . . . . . 
-                    . . . . 9 . . . . . 9 . . . . . 
-                    . . . . . 9 9 9 9 9 . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `, playerSprite, 0, 50)
+                projectile = sprites.createProjectileFromSprite(assets.image`PROJ`, playerSprite, 0, 50)
             }
         }
     }
@@ -288,7 +203,7 @@ let dmgCd = false
 let XTRASHOOT = false
 let BASCSHOOT = false
 if (info.highScore() == 0) {
-    game.splash("reloading...")
+    game.splash("reloading... This screen will only appear the first time this game is played.")
     info.setScore(10000)
     game.gameOver(true)
 }

@@ -24,6 +24,16 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "ENEMYASSETIMAGE"
     },
+    "image5": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkJmZAAAAAAAJAAAJAAAAAAmZCQkAAAAACQkJCQAAAAAJmQkJAAAAAAkAAAkAAAAAkJmZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "PROJ"
+    },
+    "image6": {
+        "data": "hwQQABAAAAAAAABEAPz/AAAAQFXEF2EPAMBUVUUREfYAbFQiRRER8cB3VCJFERHBbGwXIXIXEcF89vcvcncRwXxm9y9yZ2bBfGYXIXL3ZsZ89mf/d89sxnxsd3fHzGbGbHd3d8ZmZsbAdndnf2dmDADM/P98Z8wAAAAAAMDHAAAAAAAAAMwAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "BOSS"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",
